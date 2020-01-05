@@ -53,11 +53,16 @@ export class EditSaleModal extends Component {
             StoreId: this.state.storeId
         };
         console.log("sale EDIT", myEntity);
+
+        var self = this;
         $.ajax({
             type: 'PUT',
             dataType: 'json',
             data: myEntity,
-            url: 'api/Sale/UpdateSale'
+            url: 'api/Sale/UpdateSale',
+            success: function () {
+                self.props.refresh();
+            }
         });
     }
 

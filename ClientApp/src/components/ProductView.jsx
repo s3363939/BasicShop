@@ -23,7 +23,7 @@ export class ProductView extends Component {
         this.componentDidMount();
     }
 
-    static renderProductsTable(products) {
+    renderProductsTable() {
         return (
             <div>
                 <Table celled>
@@ -37,7 +37,7 @@ export class ProductView extends Component {
                     </Table.Header>
 
                     <Table.Body>
-                        {products.map(product =>
+                        {this.state.products.map(product =>
                             <Table.Row key={product.id}>
                                 <Table.Cell>{product.name}</Table.Cell>
                                 <Table.Cell>{product.price}</Table.Cell>
@@ -49,12 +49,14 @@ export class ProductView extends Component {
                                         field2="Price"
                                         value1={product.name}
                                         value2={product.price}
+                                        refresh={this.refresh}
                                     />
                                 </Table.Cell>
                                 <Table.Cell>
                                     <DeleteEntityModal
                                         entityName="Product"
                                         entityId={product.id}
+                                        refresh={this.refresh}
                                     />
                                 </Table.Cell>
                             </Table.Row>
@@ -66,7 +68,7 @@ export class ProductView extends Component {
     }
 
     render() {
-        let contents = ProductView.renderProductsTable(this.state.products);
+        let contents = this.renderProductsTable();
 
         return (
             <div>

@@ -30,7 +30,7 @@ export class SaleView extends Component {
         this.componentDidMount();
     }
 
-    static renderSalesTable(sales, SaleIds) {
+    renderSalesTable() {
         return (
             <div>
                 <Table celled>
@@ -45,14 +45,27 @@ export class SaleView extends Component {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {sales.map(sale =>
+                        {this.state.sales.map(sale =>
                             <Table.Row key={sale.id}>
                                 <Table.Cell>{sale.customerName}</Table.Cell>
                                 <Table.Cell>{sale.productName}</Table.Cell>
                                 <Table.Cell>{sale.storeName}</Table.Cell>
                                 <Table.Cell>{sale.dateSold}</Table.Cell>
-                                <Table.Cell><EditSaleModal entity={sale} customerName={sale.customerName} productName={sale.productName} storeName={sale.storeName}/></Table.Cell>
-                                <Table.Cell><DeleteSaleModal entity={sale} /></Table.Cell>
+                                <Table.Cell>
+                                    <EditSaleModal
+                                        entity={sale}
+                                        customerName={sale.customerName}
+                                        productName={sale.productName}
+                                        storeName={sale.storeName}
+                                        refresh={this.refresh}
+                                    />
+                                </Table.Cell>
+                                <Table.Cell>
+                                    <DeleteSaleModal
+                                        entity={sale}
+                                        refresh={this.refresh}
+                                    />
+                                </Table.Cell>
                             </Table.Row>
                         )}
                     </Table.Body>
@@ -62,7 +75,7 @@ export class SaleView extends Component {
     }
 
     render() {
-        let contents = SaleView.renderSalesTable(this.state.sales, this.state.SaleIds);
+        let contents = this.renderSalesTable();
 
         return (
             <div>

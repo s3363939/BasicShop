@@ -32,12 +32,17 @@ export class EditEntityModal extends Component {
             [this.state.field2]: this.state.value2
         };
 
+        var self = this;
         $.ajax({
             type: 'PUT',
             dataType: 'json',
             data: myEntity,
-            url: 'api/' + this.state.entityName + '/Update' + this.state.entityName
+            url: 'api/' + this.state.entityName + '/Update' + this.state.entityName,
+            success: function () {
+                self.props.refresh();
+            }
         });
+        //this.props.refresh();
     }
 
     handleEditButton = () => {

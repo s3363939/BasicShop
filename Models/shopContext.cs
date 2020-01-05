@@ -25,8 +25,8 @@ namespace BasicShop.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                //optionsBuilder.UseSqlServer("Server=DESKTOP-FIV276S\\MSSQLSERVER01;Database=shop;Trusted_Connection=True;");
-                optionsBuilder.UseSqlServer("Server=tcp:mvpbasishop.database.windows.net,1433;Initial Catalog=shop;Persist Security Info=False;User ID=test;Password=DB4567@fgh;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-FIV276S\\MSSQLSERVER01;Database=shop;Trusted_Connection=True;");
+                //optionsBuilder.UseSqlServer("Server=tcp:mvpbasishop.database.windows.net,1433;Initial Catalog=shop;Persist Security Info=False;User ID=test;Password=DB4567@fgh;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 

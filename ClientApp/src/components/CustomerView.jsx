@@ -25,7 +25,7 @@ export class CustomerView extends Component {
         this.componentDidMount();
     }
 
-    static renderCustomersTable(customers) {
+    renderCustomersTable() {
         return (
             <div>
                 <h1>Customers</h1>
@@ -41,7 +41,7 @@ export class CustomerView extends Component {
                         </Table.Header>
 
                         <Table.Body>
-                            {customers.map(customer =>
+                            {this.state.customers.map(customer =>
                                 <Table.Row key={customer.Id}>
                                     <Table.Cell>{customer.name}</Table.Cell>
                                     <Table.Cell>{customer.address}</Table.Cell>
@@ -53,12 +53,14 @@ export class CustomerView extends Component {
                                             field2="Address"
                                             value1={customer.name}
                                             value2={customer.address}
+                                            refresh={this.refresh}
                                         />
                                     </Table.Cell>
                                     <Table.Cell>
                                         <DeleteEntityModal
                                             entityName="Customer"
                                             entityId={customer.id}
+                                            refresh={this.refresh}
                                         />
                                     </Table.Cell>
                                 </Table.Row>
@@ -71,7 +73,7 @@ export class CustomerView extends Component {
     }
 
     render() {
-        let contents = CustomerView.renderCustomersTable(this.state.customers);
+        let contents = this.renderCustomersTable();
 
         return (
             <div>

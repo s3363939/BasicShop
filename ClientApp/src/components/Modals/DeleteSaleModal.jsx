@@ -20,10 +20,14 @@ export class DeleteSaleModal extends Component {
 
         const myEntityId = this.state.sale.id;
 
+        var self = this;
         $.ajax({
             type: 'DELETE',
             dataType: 'json',
-            url: 'api/Sale/DeleteSale?id=' + myEntityId
+            url: 'api/Sale/DeleteSale?id=' + myEntityId,
+            success: function () {
+                self.props.refresh();
+            }
         });
     }
 

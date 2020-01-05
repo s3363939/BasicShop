@@ -23,7 +23,7 @@ export class StoreView extends Component {
         this.componentDidMount();
     }
 
-    static renderStoresTable(stores) {
+    renderStoresTable() {
         return (
             <div>
                 <Table celled>
@@ -36,7 +36,7 @@ export class StoreView extends Component {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {stores.map(store =>
+                        {this.state.stores.map(store =>
                             <Table.Row key={store.id}>
                                 <Table.Cell>{store.name}</Table.Cell>
                                 <Table.Cell>{store.address}</Table.Cell>
@@ -48,12 +48,14 @@ export class StoreView extends Component {
                                         entity={store}
                                         value1={store.name}
                                         value2={store.address}
+                                        refresh={this.refresh}
                                     />
                                 </Table.Cell>
                                 <Table.Cell>
                                     <DeleteEntityModal
                                         entityName="Store"
                                         entityId={store.id}
+                                        refresh={this.refresh}
                                     />
                                 </Table.Cell>
                             </Table.Row>
@@ -65,7 +67,7 @@ export class StoreView extends Component {
     }
 
     render() {
-        let contents = StoreView.renderStoresTable(this.state.stores);
+        let contents = this.renderStoresTable();
 
         return (
             <div>

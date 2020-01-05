@@ -24,7 +24,10 @@ export class DeleteEntityModal extends Component {
         $.ajax({
             type: 'DELETE',
             dataType: 'json',
-            url: 'api/' + this.state.entityName + '/Delete' + this.state.entityName + '?id=' + myEntityId
+            url: 'api/' + this.state.entityName + '/Delete' + this.state.entityName + '?id=' + myEntityId,
+            success: function () {
+                self.props.refresh();
+            }
         });
     }
 
