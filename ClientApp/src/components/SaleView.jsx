@@ -26,10 +26,13 @@ export class SaleView extends Component {
             .then(data => this.setState({ SaleIds: data }));
     }
 
+    refresh = () => {
+        this.componentDidMount();
+    }
+
     static renderSalesTable(sales, SaleIds) {
         return (
             <div>
-                <CreateSaleModal/>
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
@@ -64,6 +67,7 @@ export class SaleView extends Component {
         return (
             <div>
                 <h1>Sales</h1>
+                <CreateSaleModal refresh={this.refresh} />
                 {contents}
             </div>
         );

@@ -51,12 +51,16 @@ export class CreateSaleModal extends Component {
             StoreId: this.state.storeId
         };
         console.log('new sale: ', mySale);
-        
+
+        var self = this;
         $.ajax({
             type: 'POST',
             dataType: 'json',
             data: mySale,
-            url: 'api/Sale/AddSale'
+            url: 'api/Sale/AddSale',
+            success: function () {
+                self.props.refresh();
+            }
         });
         
         this.setState({ DateSold: '', productId: '', customerId: '', storeId: '' })

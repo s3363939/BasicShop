@@ -19,10 +19,13 @@ export class StoreView extends Component {
             .then(data => this.setState({ stores: data }));
     }
 
+    refresh = () => {
+        this.componentDidMount();
+    }
+
     static renderStoresTable(stores) {
         return (
             <div>
-                <CreateEntityModal entityName="Store" field1="Name" field2="Address" />
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
@@ -67,6 +70,7 @@ export class StoreView extends Component {
         return (
             <div>
                 <h1>Stores</h1>
+                <CreateEntityModal refresh={this.refresh} entityName="Store" field1="Name" field2="Address" />
                 {contents}
             </div>
         );

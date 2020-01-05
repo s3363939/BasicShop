@@ -29,8 +29,7 @@ export class CustomerView extends Component {
         return (
             <div>
                 <h1>Customers</h1>
-                <div>
-                    
+                <div>                    
                     <Table celled>
                         <Table.Header>
                             <Table.Row>
