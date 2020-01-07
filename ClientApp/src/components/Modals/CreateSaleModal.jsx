@@ -2,6 +2,7 @@
 import { Icon, Button, Modal, Dropdown, Divider } from 'semantic-ui-react';
 import $ from 'jquery';
 import { DateInput } from 'semantic-ui-calendar-react';
+import Moment from 'moment';
 
 export class CreateSaleModal extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export class CreateSaleModal extends Component {
             customers: [],
             products: [],
             stores: [],
-            dateSold: '',
+            dateSold: Moment().format('YYYY-MM-DD').toString(),
             productId: '',
             customerId: '',
             storeId: ''
@@ -43,14 +44,12 @@ export class CreateSaleModal extends Component {
     }
 
     CreateSale() {
-
         const mySale = {
             DateSold: this.state.dateSold,
             ProductId: this.state.productId,
             CustomerId: this.state.customerId,
             StoreId: this.state.storeId
         };
-        console.log('new sale: ', mySale);
 
         var self = this;
         $.ajax({
@@ -84,7 +83,11 @@ export class CreateSaleModal extends Component {
     }
 
     setDate = (event, { name, value }) => {
-        this.setState({ dateSold: value });        
+        this.setState({ dateSold: value });                
+    }
+
+    formatDate = (date) => {
+        return Moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY')
     }
 
     render() {
@@ -122,7 +125,7 @@ export class CreateSaleModal extends Component {
                 <Modal.Content >                    
                     <DateInput
                         name='date'
-                        value={dateSold}
+                        value={this.formatDate(dateSold)}
                         onChange={this.setDate} /> 
                     <br />
                     <Dropdown

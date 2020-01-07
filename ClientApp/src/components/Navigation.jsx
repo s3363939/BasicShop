@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Container, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { Col, Grid, Row } from 'react-bootstrap';
+import { Grid, Row } from 'react-bootstrap';
 
 export class FixedMenuLayout extends Component {
 

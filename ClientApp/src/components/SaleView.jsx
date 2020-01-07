@@ -3,6 +3,8 @@ import { Table } from 'semantic-ui-react';
 import { CreateSaleModal } from './Modals/CreateSaleModal';
 import { EditSaleModal } from './Modals/EditSaleModal';
 import { DeleteSaleModal } from './Modals/DeleteSaleModal';
+import Moment from 'moment';
+
 
 export class SaleView extends Component {
     displayName = SaleView.name
@@ -11,8 +13,7 @@ export class SaleView extends Component {
         super(props);
 
         this.state = {
-            sales: [],
-            SaleIds: []
+            sales: []
         };
     }
 
@@ -20,14 +21,14 @@ export class SaleView extends Component {
         fetch('api/Sale/GetAllSales')
             .then(response => response.json())
             .then(data => this.setState({ sales: data }));
-
-        fetch('api/Sale/GetAllSalesIds')
-            .then(response => response.json())
-            .then(data => this.setState({ SaleIds: data }));
     }
 
     refresh = () => {
         this.componentDidMount();
+    }
+
+    formatDate = (date) => {
+        return Moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY')
     }
 
     renderSalesTable() {
@@ -50,7 +51,7 @@ export class SaleView extends Component {
                                 <Table.Cell>{sale.customerName}</Table.Cell>
                                 <Table.Cell>{sale.productName}</Table.Cell>
                                 <Table.Cell>{sale.storeName}</Table.Cell>
-                                <Table.Cell>{sale.dateSold}</Table.Cell>
+                                <Table.Cell>{this.formatDate(sale.dateSold)}</Table.Cell>
                                 <Table.Cell>
                                     <EditSaleModal
                                         entity={sale}
@@ -76,7 +77,6 @@ export class SaleView extends Component {
 
     render() {
         let contents = this.renderSalesTable();
-
         return (
             <div>
                 <h1>Sales</h1>

@@ -1,7 +1,8 @@
 ﻿import React, { Component } from 'react';
-import { Icon, Button, Modal, Divider, Form, Dropdown } from 'semantic-ui-react';
+import { Icon, Button, Modal, Divider, Dropdown } from 'semantic-ui-react';
 import $ from 'jquery';
 import { DateInput } from 'semantic-ui-calendar-react';
+import Moment from 'moment';
 
 export class EditSaleModal extends Component {
     constructor(props) {
@@ -52,7 +53,6 @@ export class EditSaleModal extends Component {
             CustomerId: this.state.customerId,
             StoreId: this.state.storeId
         };
-        console.log("sale EDIT", myEntity);
 
         var self = this;
         $.ajax({
@@ -84,7 +84,12 @@ export class EditSaleModal extends Component {
     }
 
     setDate = (event, { name, value }) => {
-        this.setState({ dateSold: value });
+        const formatedDate = Moment(value, 'DD/MM/YYYY').format('YYYY-MM-DD');        
+        this.setState({ dateSold: formatedDate });
+    }
+
+    formatDate = (date) => {
+        return Moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY')
     }
 
     render() {
@@ -93,7 +98,8 @@ export class EditSaleModal extends Component {
             customers,
             products,
             stores,
-            sale
+            sale,
+            dateSold
         } = this.state
 
         const customerOptions = customers.map((customer) => { return { key: customer.id, value: customer.id, text: customer.name } })
@@ -125,7 +131,7 @@ export class EditSaleModal extends Component {
                 <Modal.Content >
                     <DateInput
                         name='date'
-                        value={sale.dateSold}
+                        value={this.formatDate(dateSold)}
                         onChange={this.setDate}
                     />
                     <br />
